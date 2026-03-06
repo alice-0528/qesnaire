@@ -1,0 +1,108 @@
+<div class="container">
+
+  <div>
+    <h1>問卷名稱</h1>
+
+    <p>問卷說明：</p>
+    <p>This is questionnaire synopsis.This is questionnaire synopsis.This is questionnaire synopsis.This is questionnaire synopsis.This is questionnaire synopsis.This is questionnaire synopsis.</p>
+  </div>
+
+  <!-- 填寫者資訊 -->
+  <div class="userData">
+    <form class="example-form">
+      <label for="">姓名：</label>
+      <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Ex. Alex" value="">
+      </mat-form-field>
+
+      <label for="">Email：</label>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Ex. abc@xyz.com" value="">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <!-- 問卷內容 -->
+  <div class="qesContent">
+    <div>
+      <p>Qes1</p>
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1">Option 1</mat-radio-button>
+        <mat-radio-button value="2">Option 2</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div>
+      <P>Qes2</P>
+
+      <section class="example-section">
+        <span class="example-list-section">
+          <mat-checkbox
+            class="example-margin"
+            [checked]="task().completed"
+            [indeterminate]="partiallyComplete()"
+            (change)="update($event.checked)"
+          >
+            {{task().name}}
+          </mat-checkbox>
+        </span>
+        <span class="example-list-section">
+          <ul>
+            @for (subtask of task().subtasks; track subtask; let i = $index) {
+              <li>
+                <mat-checkbox [checked]="subtask.completed" (change)="update($event.checked, i)">
+                  {{subtask.name}}
+                </mat-checkbox>
+              </li>
+            }
+          </ul>
+        </span>
+      </section>
+    </div>
+
+    <div>
+      <p>Qes3</p>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Favorite food</mat-label>
+          <input matInput placeholder="Ex. Pizza" value="">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Leave a comment</mat-label>
+          <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+      </form>
+    </div>
+
+
+
+  </div>
+
+  <!-- 送出按鈕 -->
+  <div class="sendBtn">
+    <section>
+      <div class="example-button-row">
+        <div class="example-flex-container">
+          <div class="example-button-container">
+            <button mat-fab extended class="btnStyle">
+              <mat-icon>send</mat-icon>
+              送出
+            </button>
+          </div>
+
+          <div class="example-button-container">
+            <button mat-fab extended class="btnStyle">
+              <mat-icon>cancel_schedule_send</mat-icon>
+              取消
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+</div>

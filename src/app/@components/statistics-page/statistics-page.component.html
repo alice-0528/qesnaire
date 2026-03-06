@@ -1,0 +1,17 @@
+<div class="container">
+  <p>2026/01/01-2026/02/28</p>
+
+  <h1>問卷名稱</h1>
+
+  <!-- 圓餅圖 -->
+  <div class="pie">
+    @for (chartImg of chartArray; track $index) {
+      <canvas [id]="chartImg.id"></canvas>
+    }
+
+  </div>
+
+
+
+
+</div>

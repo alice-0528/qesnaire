@@ -1,0 +1,144 @@
+// 最外圍的框
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+// 搜尋區域
+.search {
+  width: 100%;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+}
+
+.example-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.example-full-width {
+  margin: 10px;
+}
+
+.Time{
+  margin: 10px;
+}
+
+
+// 搜尋按鈕
+section {
+  display: table;
+}
+
+.example-button-row {
+  display: table-cell;
+  max-width: 600px;
+}
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
+  margin-top: 18px;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 140px;
+}
+
+.mat-divider {
+  border-top-width: var(--mat-divider-width, 0px);
+}
+
+.search-btn {
+  background-color: #9575cd !important;
+  color: white !important;
+  border-radius: 12px !important;
+  padding: 0 24px !important;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: #7e57c2 !important;
+  }
+}
+
+// 列表區域
+.list-area {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fafafa;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  margin-top: 20px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f6f3fa !important;
+  }
+}
+
+.mat-mdc-header-cell {
+  background-color: #f8f9fa;
+  color: #555;
+  font-weight: 600;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+
+
+// 狀態標籤
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+
+  &.status-not-started { background-color: #e3f2fd; color: #1976d2; }
+  &.status-ongoing { background-color: #e8f5e9; color: #388e3c; }
+  &.status-ended { background-color: #eeeeee; color: #757575; }
+}
+
+// 結果連結按鈕
+.result-link {
+  color: #ff8a65;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover { text-decoration: underline; }
+}
+
+//問卷按鈕連結
+.qesnaire-link {
+  color: #76acb6;
+  font-weight: bold;
+
+  &:hover { text-decoration: underline; }
+}

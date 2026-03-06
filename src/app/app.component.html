@@ -1,0 +1,28 @@
+<header class="header">
+
+  <!-- 登入登出按鈕 -->
+  <div class="loginBtn">
+    <section>
+      <div class="example-button-row">
+        <div class="example-flex-container">
+          <div class="example-button-container">
+            <button mat-raised-button (click)="openDialog()" class="btnStyle">
+              <mat-icon>login</mat-icon>
+              登入
+            </button>
+          </div>
+
+          <div class="example-button-container">
+            <button mat-raised-button class="btnStyle">
+              <mat-icon>logout</mat-icon>
+              登出
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</header>
+
+<router-outlet />
