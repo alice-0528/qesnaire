@@ -16,6 +16,7 @@ import { AppComponent } from '../../app.component';
 
 export interface DialogData {
   account: string;
+  password: string;
   name: string;
 }
 
@@ -37,6 +38,7 @@ export class LoginComponent {
   readonly dialogRef = inject(MatDialogRef<AppComponent>);
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   readonly account = model(this.data.account);
+  readonly password = model(this.data.password)
 
   onNoClick(): void {
     this.dialogRef.close();

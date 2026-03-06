@@ -1,17 +1,14 @@
 .header {
   background-color: #fafafa;
-  width: 100vw;
+  width: 100%;
   height: 60px;
-  // position: fixed;
-  // top:0%;
-  // left:0%;
-  // z-index: 10;
+  display: flex;
+  justify-content: space-between;
+
 }
 
 // 登入登出按鈕
-section {
-  display: table;
-}
+
 
 .btnStyle {
   background-color: #9575cd !important;
@@ -48,5 +45,15 @@ section {
 
 .loginBtn {
   display: flex;
-  justify-content: end;
+}
+
+.homeStyle{
+  background-color: #9575cd !important;
+  color: white !important;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    background-color: #7e57c2 !important;
+  }
 }

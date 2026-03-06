@@ -8,10 +8,10 @@
   <br>
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput [(ngModel)]="account" />
+    <input type="password" matInput [(ngModel)]="password" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="account()" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="account()" [mat-dialog-close]="password()" cdkFocusInitial>Ok</button>
 </mat-dialog-actions>
