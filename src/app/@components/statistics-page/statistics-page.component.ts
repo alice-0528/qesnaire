@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 
+
 @Component({
   selector: 'app-statistics-page',
   imports: [],
@@ -8,6 +9,7 @@ import Chart from 'chart.js/auto';
   styleUrl: './statistics-page.component.scss'
 })
 export class StatisticsPageComponent {
+
 
   ngAfterViewInit(): void {
 

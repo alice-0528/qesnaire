@@ -76,11 +76,28 @@ export class ListComponent implements AfterViewInit, OnInit {
 
     this.dataSource.filterPredicate = (data: PeriodicElement, filter: string) => {
 
-      // 將問卷名稱與搜尋關鍵字都轉為小寫，並去掉前後空白
-      const name = data.name.trim().toLowerCase();
-      const filterText = filter.trim().toLowerCase();
+    const searchTerms = JSON.parse(filter);
 
-      return name.includes(filterText);
+      // --- 條件 A: 名稱比對 ---
+    const nameMatch = data.name.toLowerCase().includes(searchTerms.name.toLowerCase());
+
+    // --- 條件 B: 日期比對 ---
+    let dateMatch = true;
+    if (searchTerms.start || searchTerms.end) {
+      // 將資料中的字串 '2026/01/01' 轉為 Date 物件進行比對
+      const rowStart = new Date(data.start);
+      const rowEnd = new Date(data.end);
+
+      const filterStart = searchTerms.start ? new Date(searchTerms.start) : null;
+      const filterEnd = searchTerms.end ? new Date(searchTerms.end) : null;
+
+      // 邏輯：資料的區間是否與搜尋的區間有交集 (或是完全包含)
+      // 這裡採用簡單邏輯：只要資料的開始時間 >= 搜尋開始 且 資料結束 <= 搜尋結束
+      if (filterStart) dateMatch = dateMatch && rowStart >= filterStart;
+      if (filterEnd) dateMatch = dateMatch && rowEnd <= filterEnd;
+    }
+
+    return nameMatch && dateMatch;
 
     };
   }

@@ -38,6 +38,8 @@ export class AppComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
+      width: '350px',
+      height: '350px',
       data: {name: this.name(), animal: this.animal()},
     });
 

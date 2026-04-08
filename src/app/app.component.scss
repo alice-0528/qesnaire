@@ -8,8 +8,6 @@
 
 }
 
-// 登入登出按鈕
-
 
 .btnStyle {
   background-color: #9575cd !important;
@@ -51,10 +49,15 @@
 .homeStyle{
   background-color: #9575cd !important;
   color: white !important;
-  transition: transform 0.2s;
+  transition: transform 0.2s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
+  box-shadow: none !important;
 
   &:hover {
     transform: translateY(-2px);
     background-color: #7e57c2 !important;
+
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+                0px 6px 10px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 18px 0px rgba(0, 0, 0, 0.12) !important;
   }
 }
