@@ -7,23 +7,31 @@
   </div>
 
   <!-- 填寫者資訊 -->
-  <div class="userData">
+  <div class="userData" formGroupName="user">
+    @for (field of currentSurvey.userData; track field.key) {
     <mat-form-field class="example-full-width">
-      <mat-label>姓名</mat-label>
-      <input matInput formControlName="userName">
-    </mat-form-field>
+      <mat-label>{{ field.label }}</mat-label>
+      <input matInput [formControlName]="field.key">
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="userEmail">
+      @if (surveyForm.get('user.' + field.key)?.invalid && surveyForm.get('user.' + field.key)?.touched) {
+        <mat-error>
+          @if (surveyForm.get('user.' + field.key)?.errors?.['required']) { 這是必填項喔！눈_눈 }
+          @if (surveyForm.get('user.' + field.key)?.errors?.['email']) { 這不像是有效的 Email 格式喔 ( •̀д•́) }
+        </mat-error>
+      }
+
     </mat-form-field>
+    }
   </div>
 
   <!-- 問卷內容 -->
 <div class="qesContent" formArrayName="answers">
     @for (q of currentSurvey.questions; track q.id; let i = $index) {
       <div class="question-block">
-        <p><strong>{{ i + 1 }}. {{ q.title }}</strong></p>
+        <p>
+          <strong>{{ i + 1 }}. {{ q.title }}</strong>
+          @if (q.required) { <span style="color: red"> * </span> }
+        </p>
 
         @if (q.type === 'radio') {
           <mat-radio-group [formControlName]="i">
@@ -46,6 +54,11 @@
             <textarea matInput [formControlName]="i" placeholder="您的回答"></textarea>
           </mat-form-field>
         }
+
+        @if (surveyForm.get('answers.' + i)?.invalid && surveyForm.get('answers.' + i)?.touched) {
+        <small style="color: red"> 這是必填項喔！눈_눈</small>
+        }
+
       </div>
       <hr>
     }
