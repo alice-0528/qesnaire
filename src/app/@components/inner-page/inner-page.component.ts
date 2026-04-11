@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
@@ -95,8 +95,8 @@ export class InnerPageComponent {
         // 建立一個驗證器陣列
         const validators = q.required ? [Validators.required] : [];
 
-        if (q.type === 'checkbox') {
-          answersArray.push(this.fb.array(q.options.map(() => false)));
+        if (q.type === 'checkbox' && q.required) {
+          answersArray.push(this.fb.array(q.options.map(() => false), this.minSelectedCheckboxes));
         } else {
           answersArray.push(this.fb.control('', validators));
         }
@@ -133,6 +133,14 @@ export class InnerPageComponent {
       alert('請檢查欄位是否填寫完整');
     }
   }
+
+  // 一個簡單的自定義驗證：檢查陣列裡是否至少有一個 true
+  minSelectedCheckboxes = (control: AbstractControl) => {
+    const values = control.value as boolean[];
+    const totalSelected = values ? values.filter(v => v === true).length : 0;
+    return totalSelected >= 1 ? null : { required: true };
+  }
+
 }
 
 
