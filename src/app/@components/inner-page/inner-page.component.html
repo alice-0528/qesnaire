@@ -1,9 +1,20 @@
+@if (!isPreview) {
 <div class="container" [formGroup]="surveyForm">
 
-  <div>
+  <div class="survey-header">
+    <div class="header-main">
       <h1>{{ currentSurvey.name }}</h1>
-      <p>問卷說明：</p>
-      <p>{{ currentSurvey.description }}</p>
+      <div class="date-badge">
+        <mat-icon>calendar_today</mat-icon>
+        <span>{{ currentSurvey.startDate }}</span>
+        <mat-icon class="arrow">east</mat-icon>
+        <span>{{ currentSurvey.endDate }}</span>
+      </div>
+    </div>
+    <div class="description-card">
+      <p class="label">問卷說明：</p>
+      <p class="text">{{ currentSurvey.description }}</p>
+    </div>
   </div>
 
   <!-- 填寫者資訊 -->
@@ -14,10 +25,10 @@
       <input matInput [formControlName]="field.key">
 
       @if (surveyForm.get('user.' + field.key)?.invalid && surveyForm.get('user.' + field.key)?.touched) {
-        <mat-error>
-          @if (surveyForm.get('user.' + field.key)?.errors?.['required']) { 這是必填項喔！눈_눈 }
-          @if (surveyForm.get('user.' + field.key)?.errors?.['email']) { 這不像是有效的 Email 格式喔 ( •̀д•́) }
-        </mat-error>
+      <mat-error>
+        @if (surveyForm.get('user.' + field.key)?.errors?.['required']) { 這是必填項喔！눈_눈 }
+        @if (surveyForm.get('user.' + field.key)?.errors?.['email']) { 這不像是有效的 Email 格式喔 ( •̀д•́) }
+      </mat-error>
       }
 
     </mat-form-field>
@@ -25,42 +36,44 @@
   </div>
 
   <!-- 問卷內容 -->
-<div class="qesContent" formArrayName="answers">
+  <div class="qesContent" formArrayName="answers">
     @for (q of currentSurvey.questions; track q.id; let i = $index) {
-      <div class="question-block">
-        <p>
-          <strong>{{ i + 1 }}. {{ q.title }}</strong>
-          @if (q.required) { <span style="color: red"> * </span> }
-        </p>
+    <div class="question-block">
+      <p>
+        <strong>{{ i + 1 }}. {{ q.title }}</strong>
+        @if (q.required) { <span style="color: red"> * </span> }
+      </p>
 
-        @if (q.type === 'radio') {
-          <mat-radio-group [formControlName]="i">
-            @for (opt of q.options; track opt) {
-              <mat-radio-button [value]="opt">{{ opt }}</mat-radio-button>
-            }
-          </mat-radio-group>
+      @if (q.type === 'radio') {
+      <mat-radio-group [formControlName]="i">
+        @for (opt of q.options; track opt) {
+        <mat-radio-button [value]="opt">{{ opt }}</mat-radio-button>
         }
+      </mat-radio-group>
+      }
 
-        @if (q.type === 'checkbox') {
-          <div [formArrayName]="i">
-            @for (opt of q.options; track opt; let k = $index) {
-              <mat-checkbox [formControlName]="k">{{ opt }}</mat-checkbox>
-            }
-          </div>
+      @if (q.type === 'checkbox') {
+      <div [formArrayName]="i">
+        @for (opt of q.options; track opt; let k = $index) {
+        <mat-checkbox [formControlName]="k">{{ opt }}</mat-checkbox>
         }
-
-        @if (q.type === 'text') {
-          <mat-form-field class="example-full-width">
-            <textarea matInput [formControlName]="i" placeholder="您的回答"></textarea>
-          </mat-form-field>
-        }
-
-        @if (surveyForm.get('answers.' + i)?.invalid && surveyForm.get('answers.' + i)?.touched) {
-        <small style="color: red"> 這是必填項喔！눈_눈</small>
-        }
-
       </div>
-      <hr>
+      }
+
+      @if (q.type === 'text') {
+      <mat-form-field class="example-full-width">
+        <textarea matInput [formControlName]="i" placeholder="您的回答"></textarea>
+      </mat-form-field>
+      }
+
+      @if (surveyForm.get('answers.' + i)?.invalid && surveyForm.get('answers.' + i)?.touched) {
+      <mat-error>
+        <small> 這是必填項喔！눈_눈</small>
+      </mat-error>
+      }
+
+    </div>
+
     }
   </div>
 
@@ -70,3 +83,42 @@
     </button>
   </div>
 </div>
+} @else {
+<!-- 預覽頁面 -->
+<div class="container preview-box">
+  <div class="header-info">
+    <h2>{{ previewData.surveyName }}</h2>
+    <p>{{ previewData.description }}</p>
+    <mat-divider></mat-divider>
+    <p><strong>姓名：</strong> {{ previewData.userName }}</p>
+    <p><strong>Email：</strong> {{ previewData.userEmail || ' ' }}</p>
+  </div>
+
+
+  <div class="preview-content">
+    @for (ans of previewData.processedAnswers; track $index) {
+    <div class="preview-item">
+      <p class="question-title">
+        <strong>{{ $index + 1 }}. {{ currentSurvey.questions[$index].title }}</strong>
+      </p>
+      <p class="user-answer">
+        @if (isArray(ans)) {
+        {{ ans.join(', ') || '( )' }}
+        } @else {
+        {{ ans || '( )' }}
+        }
+      </p>
+    </div>
+    }
+  </div>
+
+  <div class="action-btns">
+    <button mat-fab extended class="btnStyle" (click)="editBack()">
+      <mat-icon>undo</mat-icon>回頭修改
+    </button>
+    <button mat-fab extended class="btnStyle" (click)="finalSubmit()">
+      <mat-icon>check_circle</mat-icon>確定送出
+    </button>
+  </div>
+</div>
+}

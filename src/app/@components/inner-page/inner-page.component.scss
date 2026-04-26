@@ -4,6 +4,62 @@
   padding: 0 20px;
 }
 
+// 標題區塊
+.survey-header {
+  margin-bottom: 30px;
+  border-left: 6px solid #b2dfdb;
+  padding-left: 20px;
+
+  h1 {
+    font-size: 2.2rem;
+    color: #455a64;
+    margin: 0;
+  }
+}
+
+.date-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 12px;
+  border-radius: 20px;
+  width: fit-content;
+  margin-top: 10px;
+  font-size: 0.9rem;
+
+  .mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .arrow {
+    margin: 0 4px;
+  }
+}
+
+// 說明文字區塊
+.description-card {
+  margin-top: 15px;
+  background: #fff9c4;
+  padding: 15px;
+  border-radius: 8px;
+
+  .label {
+    font-weight: bold;
+    color: #f9a825;
+    margin-bottom: 5px;
+  }
+
+  .text {
+    color: #555;
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
 // 填寫者資訊
 .userData {
   width: 100%;
@@ -11,7 +67,7 @@
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 24px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
 }
 
@@ -32,8 +88,28 @@
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 24px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
+}
+
+.question-block {
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  background: white;
+  transition: all 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-color: #9575cd;
+  }
+
+  strong {
+    font-size: 1.1rem;
+    display: inline-block;
+    margin-bottom: 15px;
+  }
 }
 
 .example-section {
@@ -49,7 +125,6 @@ ul {
   margin-top: 4px;
 }
 
-
 // 送出按鈕
 section {
   display: table;
@@ -60,6 +135,7 @@ section {
   color: white !important;
   padding: 0 24px !important;
   transition: transform 0.2s;
+  margin-right: 10px;
 
   &:hover {
     transform: translateY(-2px);
@@ -91,4 +167,52 @@ section {
 .sendBtn {
   display: flex;
   justify-content: end;
+}
+
+// 預覽頁
+.preview-box {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 90%;
+  background: rgba(224, 236, 198, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid white;
+  border-radius: 12px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  padding: 40px;
+  overflow-y: auto; // 內容過長可捲動
+}
+
+.preview-content {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+// 表單錯誤訊息
+mat-error {
+  display: inline-block;
+  margin-top: 4px;
+  background: #ffebee;
+  color: #c62828;
+  padding: 4px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+mat-form-field {
+  transition: z-index 0s; // 讓 z-index 變化即時生效
+
+  &:has(mat-error) {
+    position: relative;
+    z-index: 2; /* 讓出錯的欄位層級高於下一個 */
+  }
 }
